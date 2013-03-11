@@ -105,7 +105,7 @@ function wp_fetch_random_posts ($limit = 10) {
 
 	$ids = $wpdb->get_col($q1, 0);
 	$count = count($ids);
-	if($count <= 1) { 
+	if($count <= 1) {
 		if($count === 0) return false;
 		if($count === 1) $rnd = $ids;
 	} else {
@@ -224,7 +224,7 @@ function wp_generate_related_posts_list_items($related_posts) {
 		}
 
 		if (!$img) {
-			$output .= get_the_excerpt($related_post->ID);
+			$output .= apply_filters( 'get_the_excerpt', $related_post->post_excerpt);
 		}
 
 		$output .=  '</div>';
