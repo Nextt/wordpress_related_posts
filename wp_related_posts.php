@@ -301,7 +301,7 @@ function wp_get_related_posts($before_title="", $after_title="") {
 	}
 
  	// figure out how to use wp_enqueue_style
-	$wp_rp_theme_style_loader = '<script type="text/javascript">
+	/*$wp_rp_theme_style_loader = '<script type="text/javascript">
 		setTimeout(function () {
 			var link = document.createElement("link");
 			link.rel = "stylesheet";
@@ -311,7 +311,7 @@ function wp_get_related_posts($before_title="", $after_title="") {
 		}, 1);
 		</script>';
 
-	$output .= $wp_rp_theme_style_loader;
+	$output .= $wp_rp_theme_style_loader;*/
 
 	return $output;
 }
