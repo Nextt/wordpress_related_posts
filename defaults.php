@@ -6,7 +6,7 @@
 	define("WP_RP_THEME_DEFAULT", "vertical-m.css");
 	define("WP_RP_THEME_PLAIN", "plain.css");
 
-	define("WP_RP_TITLE_TAG_DEFAULT", "h3");
+	define("WP_RP_TITLE_TAG_DEFAULT", "h2");
 
 	define("WP_RP_AUTO_APPEND", 'yes');
 	define("WP_RP_TITLE", "Related posts");
