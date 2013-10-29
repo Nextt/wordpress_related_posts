@@ -194,7 +194,7 @@ function wp_generate_related_posts_list_items($related_posts) {
 	$output = "";
 
 	foreach ($related_posts as $related_post ) {
-		$output .= '<div class="span4 n-pic2-link">';
+		$output .= '<div class="span6 n-pic2-link">';
 
 		$img = wp_get_post_thumbnail_img($related_post);
 		if ($img) {
@@ -207,7 +207,7 @@ function wp_generate_related_posts_list_items($related_posts) {
 				$output .= mysql2date($dateformat, $related_post->post_date) . " -- ";
 			}
 
-			$output .=  '<a href="' . get_permalink($related_post->ID) . '" title="' . esc_attr(wptexturize($related_post->post_title)) . '">' . wptexturize($related_post->post_title) . '</a>';
+			$output .=  '<a href="' . get_permalink($related_post->ID) . '" title="' . esc_attr(wptexturize($related_post->post_title)) . ' class="rel-title" ">' . wptexturize($related_post->post_title) . '</a>';
 
 			if ($wp_rp["wp_rp_comments"]){
 				$output .=  " (" . $related_post->comment_count . ")";
@@ -287,7 +287,7 @@ function wp_get_related_posts($before_title="", $after_title="") {
 		$output = '<div>' . $wp_no_rp_text . '</div>';
 	}
 
-	$output = '<div class="row related_post">' . $output . '</div>';
+	$output = '<div class="row related_post">' . $output . '</div></div>';
 
 	$wp_rp_title_tag = isset($wp_rp["wp_rp_title_tag"]) ? $wp_rp["wp_rp_title_tag"] : WP_RP_TITLE_TAG_DEFAULT;
 	if ($before_title) {
@@ -296,7 +296,7 @@ function wp_get_related_posts($before_title="", $after_title="") {
 		}
 	} else {
 		if ($wp_rp_title != '') {
-			$output =  '<'.$wp_rp_title_tag.'  class="related_post_title">'.$wp_rp_title .'</'.$wp_rp_title_tag.'>'. $output;
+			$output =  '<div class="iasd-widget iasd-widget-related_posts row-fluid"><h1 class="related_post_title">'.$wp_rp_title .'</h1>'. $output;
 		}
 	}
 
