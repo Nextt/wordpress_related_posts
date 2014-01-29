@@ -194,11 +194,13 @@ function wp_generate_related_posts_list_items($related_posts) {
 	$output = "";
 
 	foreach ($related_posts as $related_post ) {
-		$output .= '<div class="span6 n-pic2-link">';
+		$output .= '<li class="col-md-6"><a href="' . get_permalink($related_post->ID) . '" title="' . esc_attr(wptexturize($related_post->post_title)) . '">';
 
 		$img = wp_get_post_thumbnail_img($related_post);
 		if ($img) {
-			$output .=  '<a href="' . get_permalink($related_post->ID) . '" title="' . esc_attr(wptexturize($related_post->post_title)) . '">' . $img . '</a>';
+			$output .=  '<figure>' . $img . '</figure>';
+		} else {
+			$output .= '<figure><img src="' . plugin_dir_url( 'wp_related_posts.php' ) . 'wp-related-posts/static/thumbs/no_image_140x90.png" /></figure>';
 		}
 
 		if (!$wp_rp["wp_rp_thumbnail"] || ($wp_rp["wp_rp_thumbnail"] && ($wp_rp["wp_rp_thumbnail_text"] || !$img))) {
@@ -207,28 +209,28 @@ function wp_generate_related_posts_list_items($related_posts) {
 				$output .= mysql2date($dateformat, $related_post->post_date) . " -- ";
 			}
 
-			$output .=  '<a href="' . get_permalink($related_post->ID) . '" title="' . esc_attr(wptexturize($related_post->post_title)) . '" class="rel-title">' . wptexturize($related_post->post_title) . '</a>';
+			$output .=  '<h3>' . wptexturize($related_post->post_title) . '</h3></a>';
 
 			if ($wp_rp["wp_rp_comments"]){
 				$output .=  " (" . $related_post->comment_count . ")";
 			}
 
-			if ($wp_rp["wp_rp_except"]){
-				$wp_rp_except_number = trim($wp_rp["wp_rp_except_number"]);
-				if(!$wp_rp_except_number) $wp_rp_except_number = 200;
-				if($related_post->post_excerpt){
-					$output .= '<br /><small>'.(mb_substr(strip_shortcodes(strip_tags($related_post->post_excerpt)),0,$wp_rp_except_number)).'...</small>';
-				}else{
-					$output .= '<br /><small>'.(mb_substr(strip_shortcodes(strip_tags($related_post->post_content)),0,$wp_rp_except_number)).'...</small>';
-				}
-			}
+			// if ($wp_rp["wp_rp_except"]){
+			// 	$wp_rp_except_number = trim($wp_rp["wp_rp_except_number"]);
+			// 	if(!$wp_rp_except_number) $wp_rp_except_number = 200;
+			// 	if($related_post->post_excerpt){
+			// 		$output .= '<br /><small>'.(mb_substr(strip_shortcodes(strip_tags($related_post->post_excerpt)),0,$wp_rp_except_number)).'...</small>';
+			// 	}else{
+			// 		$output .= '<br /><small>'.(mb_substr(strip_shortcodes(strip_tags($related_post->post_content)),0,$wp_rp_except_number)).'...</small>';
+			// 	}
+			// }
 		}
 
-		if (!$img) {
-			$output .= apply_filters( 'get_the_excerpt', $related_post->post_excerpt);
-		}
+		// if (!$img) {
+		// 	$output .= apply_filters( 'get_the_excerpt', $related_post->post_excerpt);
+		// }
 
-		$output .=  '</div>';
+		$output .=  '</li>';
 	}
 
 	return $output;
@@ -287,7 +289,7 @@ function wp_get_related_posts($before_title="", $after_title="") {
 		$output = '<div>' . $wp_no_rp_text . '</div>';
 	}
 
-	$output = '<div class="row-fluid related_post">' . $output . '</div>';
+	$output = '<ul class="more-posts row">' . $output . '</ul>';
 
 	$wp_rp_title_tag = isset($wp_rp["wp_rp_title_tag"]) ? $wp_rp["wp_rp_title_tag"] : WP_RP_TITLE_TAG_DEFAULT;
 	if ($before_title) {
@@ -296,7 +298,7 @@ function wp_get_related_posts($before_title="", $after_title="") {
 		}
 	} else {
 		if ($wp_rp_title != '') {
-			$output =  '<h1 class="related_post_title">'.$wp_rp_title .'</h1>'. $output;
+			$output =  '<h2>'.$wp_rp_title .'</h2>'. $output;
 		}
 	}
 
@@ -312,7 +314,7 @@ function wp_get_related_posts($before_title="", $after_title="") {
 		</script>';
 
 	$output .= $wp_rp_theme_style_loader;*/
-	$output = '<div class="iasd-widget iasd-widget-related_posts row-fluid"><div class="span12">' . $output . '</div></div>';
+	//$output = '<div class="iasd-widget iasd-widget-related_posts row-fluid"><div class="span12">' . $output . '</div></div>';
 	return $output;
 }
 
