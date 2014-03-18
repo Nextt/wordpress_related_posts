@@ -298,7 +298,7 @@ function wp_get_related_posts($before_title="", $after_title="") {
 		}
 	} else {
 		if ($wp_rp_title != '') {
-			$output =  '<h2>'.$wp_rp_title .'</h2>'. $output;
+			$output =  '<h2 class="mar-top-30">'.$wp_rp_title .'</h2>'. $output;
 		}
 	}
 
